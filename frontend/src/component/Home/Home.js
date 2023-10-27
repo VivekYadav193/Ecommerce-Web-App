@@ -2,26 +2,33 @@ import React, { Fragment } from "react";
 import { CgMouse } from "react-icons/cg";
 import "./Home.css";
 import Product from "./Product.js";
+import MetaData from "../layout/MetaData.js"
 
 
 const product = {
-    name: "Apple iPhone 12 Pro Max",
-    price: 1099.99,
-    image: "https://www.mytrendyphone.eu/images2/iPhone-12-Pro-Max-128GB-Gold-0194252092330-10112020-01-p.jpg",
-    description:
-        "The iPhone 12 Pro Max is a smartphone designed and marketed by Apple Inc. It is the largest variant in the iPhone 12 lineup, with a 6.7-inch display, and was released on November 13, 2020. The phone is available in six colors: Silver, Graphite, Gold, Pacific Blue, Starlight, and (PRODUCT)RED.",
-    _id:"1"
-
-}
+  name: "Apple iPhone 12",
+  price: 1099.99,
+  image: [
+    {
+      url: "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-pink?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923780378",
+    },
+  ],
+  _id: "abc",
+};
 
 const Home = () => {
   return (
+
+
     <Fragment>
+
+       <MetaData title={"Buy Best Products Online"} />
+
       <div className="banner">
         <p>Welcome To Ecommerce</p>
         <h1> FIND AMAZING PRODUCTS BELOW</h1>
 
-        <a href="#products">
+        <a href="#container">
           <button>
             Scroll <CgMouse />
           </button>
@@ -30,6 +37,13 @@ const Home = () => {
 
       <h2 className="homeHeading">Featured Products</h2>
       <div className="container" id="container">
+        <Product product={product} />
+        <Product product={product} />
+        <Product product={product} />
+        <Product product={product} />
+        <Product product={product} />
+        <Product product={product} />
+        <Product product={product} />
         <Product product={product} />
       </div>
     </Fragment>

@@ -14,7 +14,9 @@ const options = {
 const Product = ({ product }) => {
   return (
     <Link className="productCard" to={product._id}>
-      <img src={product.image[0].url} />
+      
+     <img src={product.image[0].url} alt="product" />   
+
       <p>{product.name}</p>
       <div>
         <ReactStars {...options} /> <span>256 reviews</span>
@@ -24,4 +26,6 @@ const Product = ({ product }) => {
   );
 };
 
+
 export default Product;
+
