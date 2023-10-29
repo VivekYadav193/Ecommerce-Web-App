@@ -14,8 +14,7 @@ const options = {
 const Product = ({ product }) => {
   return (
     <Link className="productCard" to={product._id}>
-      
-     <img src={product.image[0].url} alt="product" />   
+      <img src="" alt="product" />
 
       <p>{product.name}</p>
       <div>
@@ -26,6 +25,4 @@ const Product = ({ product }) => {
   );
 };
 
-
 export default Product;
-
