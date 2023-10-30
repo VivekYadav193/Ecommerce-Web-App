@@ -21,13 +21,12 @@ class ApiFeatures {
     filter() {
      
       const queryCopy = { ...this.queryStr };
-      console.log(queryCopy);
+      
       //   Removing some fields for category
       const removeFields = ["keyword", "page", "limit"];
      
       removeFields.forEach((key) => delete queryCopy[key]);
   
-      console.log(queryCopy);
 
       // Filter For Price and Ratin
       let queryStr = JSON.stringify(queryCopy);
@@ -39,6 +38,9 @@ class ApiFeatures {
     }
   
     pagination(resultPerPage) {
+      
+      
+
       const currentPage = Number(this.queryStr.page) || 1;
   
       const skip = resultPerPage * (currentPage - 1);

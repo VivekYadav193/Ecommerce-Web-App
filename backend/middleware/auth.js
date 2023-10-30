@@ -3,7 +3,12 @@ const ErrorHandler = require("../utils/errorhandler");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
+
 exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
+
+  console.log("auth.js");
+
+
   const { token } = req.cookies;
   console.log(token);
   if (!token) {
@@ -18,6 +23,9 @@ exports.isAuthenticatedUser = catchAsyncErrors(async (req, res, next) => {
 
   next();
 });
+
+
+
 
 exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {

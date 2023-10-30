@@ -6,6 +6,7 @@ const ApiFeatures = require("../utils/apifeatures");
 // Create new product  (Admin route)
 
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
+  console.log("productRoute.js");
   req.body.user = req.user.id;
 
   const product = await Product.create(req.body);
@@ -18,8 +19,9 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 // Get all products
 
-exports.getAllProducts = catchAsyncErrors(async (req, res) => {
-  const resultPerPage = 5;
+exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
+  const resultPerPage = 6;
+
   const productsCount = await Product.countDocuments();
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
@@ -118,7 +120,6 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-
 // Get All Reviews of a product
 exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
   const product = await Product.findById(req.query.id);
@@ -132,7 +133,6 @@ exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
     reviews: product.reviews,
   });
 });
-
 
 // Delete Review
 exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
