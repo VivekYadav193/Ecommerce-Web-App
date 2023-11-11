@@ -1,13 +1,15 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/logo.png";
+import { AiOutlineSearch } from "react-icons/ai";
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FaUserAlt } from "react-icons/fa";
 
 const options = {
   burgerColorHover: "#eb4034",
   logo,
   logoWidth: "20vmax",
-  navColor1: "white",
-
+  navColor1: "grey",
   logoHoverSize: "10px",
   logoHoverColor: "#eb4034",
   link1Text: "Home",
@@ -15,7 +17,7 @@ const options = {
   link3Text: "Contact",
   link4Text: "About",
   link1Url: "/",
-  link2Url: "/",
+  link2Url: "/products",
   link3Url: "/contact",
   link4Url: "/about",
   link1Size: "1.3vmax",
@@ -26,6 +28,16 @@ const options = {
   nav4justifyContent: "flex-start",
   link1ColorHover: "#eb4034",
   link1Margin: "1vmax",
+  searchIcon: true,
+  SearchIconElement: AiOutlineSearch,
+
+  cartIcon: true,
+  CartIconElement: AiOutlineShoppingCart,
+
+  profileIcon: true,
+
+  ProfileIconElement: FaUserAlt,
+
   profileIconUrl: "/login",
   profileIconColor: "rgba(35, 35, 35,0.8)",
   searchIconColor: "rgba(35, 35, 35,0.8)",
@@ -37,11 +49,7 @@ const options = {
 };
 
 const Header = () => {
-  return (
-    <div>
-      <ReactNavbar {...options} />
-    </div>
-  );
+  return <ReactNavbar {...options} />;
 };
 
 export default Header;

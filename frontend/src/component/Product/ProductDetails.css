@@ -1,4 +1,5 @@
-.ProductDetails {
+.ProductDetails 
+{
   background-color: rgb(255, 255, 255);
   width: 100vw;
   max-width: 100%;
@@ -7,7 +8,8 @@
   display: flex;
 }
 
-.ProductDetails > div {
+.ProductDetails > div 
+{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -18,7 +20,8 @@
   border: 1px solid white;
 }
 
-.ProductDetails > div:last-child {
+.ProductDetails > div:last-child 
+{
   align-items: flex-start;
 }
 
