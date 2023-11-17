@@ -50,6 +50,7 @@ const Products = () => {
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
   };
+
   let count = filteredProductsCount;
 
   console.log(filteredProductsCount, "__", resultPerPage, "__", productsCount);
@@ -119,7 +120,7 @@ const Products = () => {
             </fieldset>
           </div>
 
-          {resultPerPage < productsCount && (
+          {resultPerPage < count && (
             <div className="paginationBox">
               <Pagination
                 activePage={currentPage}

@@ -285,3 +285,18 @@
     font: 300 5vw cursive;
   }
 }
+
+
+.redColor{
+  color: red;
+}
+
+.greenColor{
+  color:green
+}
+
+.procount{
+  display:inline-flex;
+  width: 20px;
+  justify-content: center;
+}

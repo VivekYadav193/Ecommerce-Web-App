@@ -24,7 +24,7 @@ import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 import { useParams } from "react-router-dom";
 
 const ProductDetails = ({ match }) => {
-    const { id } = useParams();
+  const { id } = useParams();
 
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -53,6 +53,7 @@ const ProductDetails = ({ match }) => {
     if (product.Stock <= quantity) return;
 
     const qty = quantity + 1;
+    console.log(qty)
     setQuantity(qty);
   };
 
@@ -60,6 +61,7 @@ const ProductDetails = ({ match }) => {
     if (1 >= quantity) return;
 
     const qty = quantity - 1;
+    console.log(qty)
     setQuantity(qty);
   };
 
@@ -101,7 +103,7 @@ const ProductDetails = ({ match }) => {
     }
 
     dispatch(getProductDetails(id));
-  }, [dispatch,id, error, alert, reviewError, success]);
+  }, [dispatch, id, error, alert, reviewError, success]);
 
   return (
     <Fragment>
@@ -110,11 +112,11 @@ const ProductDetails = ({ match }) => {
       ) : (
         <Fragment>
           <MetaData title={`${product.name} -- ECOMMERCE`} />
-         
-         
+
+
           <div className="ProductDetails">
             <div>
-              
+
               <Carousel>
                 {product.images &&
                   product.images.map((item, i) => (
@@ -130,12 +132,12 @@ const ProductDetails = ({ match }) => {
             </div>
 
             <div>
-              
+
               <div className="detailsBlock-1">
                 <h2>{product.name}</h2>
                 <p>Product # {product._id}</p>
               </div>
-              
+
               <div className="detailsBlock-2">
                 <Rating {...options} />
                 <span className="detailsBlock-2-span">
@@ -149,21 +151,27 @@ const ProductDetails = ({ match }) => {
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button onClick={decreaseQuantity}>-</button>
-                    <input readOnly type="number" value={quantity} />
+
+                    <div className="procount" >{quantity}</div>
+
                     <button onClick={increaseQuantity}>+</button>
                   </div>
+
                   <button
                     disabled={product.Stock < 1 ? true : false}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
                   </button>
+
                 </div>
 
                 <p>
                   Status:
                   <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
+
                     {product.Stock < 1 ? "OutOfStock" : "InStock"}
+
                   </b>
                 </p>
               </div>
@@ -175,6 +183,7 @@ const ProductDetails = ({ match }) => {
               <button onClick={submitReviewToggle} className="submitReview">
                 Submit Review
               </button>
+
             </div>
           </div>
 
