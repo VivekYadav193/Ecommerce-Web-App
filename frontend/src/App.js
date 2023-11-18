@@ -11,6 +11,8 @@ import Search from "./component/Product/Search.js";
 import LoginSignUp from "./component/User/LoginSignUp.js"
 import Profile from "./component/User/Profile.js"
 import { useSelector } from "react-redux";
+import store from "./store.js";
+import { loadUser } from "./actions/userAction.js";
 
 function App() {
   React.useEffect(() => {
@@ -19,7 +21,11 @@ function App() {
         families: ["Roboto", "Droid Sans", "Chilanka"],
       },
     });
+
+    store.dispatch(loadUser());
+
   }, []);
+
   const { isAuthenticated } = useSelector((state) => state.user);
 
   return (
@@ -34,7 +40,7 @@ function App() {
         <Route exact path="/Search" element={<Search />} />
         <Route exact path="/products/:keyword" element={<Products />} />
         <Route exact path="/login" element={<LoginSignUp />} />
-        <Route exact path="/account" element={isAuthenticated ? <Profile/> : <LoginSignUp/>} />
+        <Route exact path="/account" element={ <LoginSignUp />} />
 
       </Routes>
 
