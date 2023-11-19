@@ -24,10 +24,9 @@ import { Rating } from "@material-ui/lab";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
 const ProductDetails = () => {
-  //For using id
+ 
   const { id } = useParams();
-  //match.params.id will replace by the above line and for this function we
-  //don't need accept match
+  
   const dispatch = useDispatch();
   const alert = useAlert();
   const { product, loading, error } = useSelector(
