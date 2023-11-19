@@ -4,21 +4,28 @@ import Loader from "../layout/Loader/Loader";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, updateProfile, loadUser } from "../../actions/userAction";
+import { clearErrors, updateProfile,loadUser } from "../../actions/userAction";
 import { useAlert } from "react-alert";
+import { useNavigate } from 'react-router-dom';
 import { UPDATE_PROFILE_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 
-const UpdateProfile = ({ history }) => {
+
+const UpdateProfile=() =>{
+
   const dispatch = useDispatch();
   const alert = useAlert();
+  const navigate = useNavigate();
 
-  const { user } = useSelector((state) => state.user);
-  const { error, isUpdated, loading } = useSelector((state) => state.profile);
+  
+  const {user } = useSelector((state) => state.user);
+   const {error,isUpdated,loading}=useSelector((state) => state.profile )
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [avatar, setAvatar] = useState();
+
+  const [name,setName]=useState("");
+  const [email,setEmail]=useState("");
+
+  const [avatar, setAvatar] = useState("");
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
   const updateProfileSubmit = (e) => {
@@ -33,20 +40,23 @@ const UpdateProfile = ({ history }) => {
   };
 
   const updateProfileDataChange = (e) => {
-    const reader = new FileReader();
 
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatarPreview(reader.result);
-        setAvatar(reader.result);
-      }
-    };
+      const reader = new FileReader();
 
-    reader.readAsDataURL(e.target.files[0]);
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setAvatarPreview(reader.result);
+          setAvatar(reader.result);
+        }
+      };
+
+      reader.readAsDataURL(e.target.files[0]);
   };
 
+
   useEffect(() => {
-    if (user) {
+   
+    if(user){
       setName(user.name);
       setEmail(user.email);
       setAvatarPreview(user.avatar.url);
@@ -58,16 +68,17 @@ const UpdateProfile = ({ history }) => {
     }
 
     if (isUpdated) {
-      alert.success("Profile Updated Successfully");
+      alert.success("Profile Updated Successfully ");
       dispatch(loadUser());
 
-      history.push("/account");
-
+      navigate('/account');
       dispatch({
-        type: UPDATE_PROFILE_RESET,
+        type: UPDATE_PROFILE_RESET
       });
     }
-  }, [dispatch, error, alert, history, user, isUpdated]);
+  }, [dispatch, error, alert, navigate, user,isUpdated]);
+
+
   return (
     <Fragment>
       {loading ? (
@@ -77,9 +88,10 @@ const UpdateProfile = ({ history }) => {
           <MetaData title="Update Profile" />
           <div className="updateProfileContainer">
             <div className="updateProfileBox">
-              <h2 className="updateProfileHeading">Update Profile</h2>
+            <h2 className="updateProfileHeading">Update Profile</h2>
 
-              <form
+
+            <form
                 className="updateProfileForm"
                 encType="multipart/form-data"
                 onSubmit={updateProfileSubmit}
@@ -92,7 +104,7 @@ const UpdateProfile = ({ history }) => {
                     required
                     name="name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e)=>setName(e.target.value)}
                   />
                 </div>
                 <div className="updateProfileEmail">
@@ -103,9 +115,10 @@ const UpdateProfile = ({ history }) => {
                     required
                     name="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e)=>setEmail(e.target.value)}
                   />
                 </div>
+               
 
                 <div id="updateProfileImage">
                   <img src={avatarPreview} alt="Avatar Preview" />
@@ -116,18 +129,18 @@ const UpdateProfile = ({ history }) => {
                     onChange={updateProfileDataChange}
                   />
                 </div>
-                <input
-                  type="submit"
-                  value="Update"
-                  className="updateProfileBtn"
-                />
+                <input 
+                type="submit"
+               value="Update" 
+               className="updateProfileBtn" 
+               />
               </form>
-            </div>
-          </div>
-        </Fragment>
-      )}
-    </Fragment>
-  );
-};
+              </div>
+              </div>
+              </Fragment>
+      ) }
+       </Fragment>
+  )
+}
 
 export default UpdateProfile;

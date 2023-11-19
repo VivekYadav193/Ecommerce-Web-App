@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useState, useEffect } from "react";
 import "./LoginSignUp.css";
 import Loader from "../layout/Loader/Loader";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link ,useLocation, useNavigate } from "react-router-dom";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import FaceIcon from "@material-ui/icons/Face";
@@ -15,8 +15,8 @@ import { useAlert } from "react-alert";
 const LoginSignUp = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const navigate=useNavigate();
+  const location=useLocation();
   const { error, loading, isAuthenticated } = useSelector(
     (state) => state.user
   );

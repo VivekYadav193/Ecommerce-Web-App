@@ -2,52 +2,59 @@ import React, { Fragment, useState, useEffect } from "react";
 import "./UpdatePassword.css";
 import Loader from "../layout/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { clearErrors, updatePassword } from "../../actions/userAction";
+import { clearErrors, updatePassword} from "../../actions/userAction";
 import { useAlert } from "react-alert";
+import { useNavigate } from 'react-router-dom';
 import { UPDATE_PASSWORD_RESET } from "../../constants/userConstants";
 import MetaData from "../layout/MetaData";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import LockIcon from "@material-ui/icons/Lock";
 import VpnKeyIcon from "@material-ui/icons/VpnKey";
 
-const UpdatePassword = ({ history }) => {
+
+
+const UpdatePassword = () => {
+
   const dispatch = useDispatch();
   const alert = useAlert();
+  const navigate = useNavigate();
 
-  const { error, isUpdated, loading } = useSelector((state) => state.profile);
+  
+   const {error,isUpdated,loading}=useSelector((state) => state.profile )
 
-  const [oldPassword, setOldPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [oldPassword,setOldPassword]=useState("");
+  const [newPassword,setNewPassword]=useState("");
+  const [confirmPassword,setConfirmPassword]=useState("");
 
   const updatePasswordSubmit = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
-
-    myForm.set("oldPassword", oldPassword);
-    myForm.set("newPassword", newPassword);
-    myForm.set("confirmPassword", confirmPassword);
-
+     myForm.set("oldPassword",oldPassword);
+     myForm.set("newPassword",newPassword);
+     myForm.set("confirmPassword",confirmPassword);
     dispatch(updatePassword(myForm));
   };
 
+
+
   useEffect(() => {
+  
+
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Profile Updated Successfully");
+      alert.success("Profile Updated Successfully ");
 
-      history.push("/account");
-
+      navigate('/account');
       dispatch({
-        type: UPDATE_PASSWORD_RESET,
+        type: UPDATE_PASSWORD_RESET
       });
     }
-  }, [dispatch, error, alert, history, isUpdated]);
+  }, [dispatch, error, alert, navigate,isUpdated]);
 
   return (
     <Fragment>
@@ -58,13 +65,16 @@ const UpdatePassword = ({ history }) => {
           <MetaData title="Change Password" />
           <div className="updatePasswordContainer">
             <div className="updatePasswordBox">
-              <h2 className="updatePasswordHeading">Update Profile</h2>
+            <h2 className="updatePasswordHeading">Update Profile</h2>
 
-              <form
+
+            <form
                 className="updatePasswordForm"
                 onSubmit={updatePasswordSubmit}
               >
-                <div className="loginPassword">
+              
+                 
+              <div className="updatePassword">
                   <VpnKeyIcon />
                   <input
                     type="password"
@@ -74,8 +84,7 @@ const UpdatePassword = ({ history }) => {
                     onChange={(e) => setOldPassword(e.target.value)}
                   />
                 </div>
-
-                <div className="loginPassword">
+                <div className="updatePassword">
                   <LockOpenIcon />
                   <input
                     type="password"
@@ -85,7 +94,7 @@ const UpdatePassword = ({ history }) => {
                     onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </div>
-                <div className="loginPassword">
+                <div className="updatePassword">
                   <LockIcon />
                   <input
                     type="password"
@@ -95,18 +104,19 @@ const UpdatePassword = ({ history }) => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                   />
                 </div>
-                <input
-                  type="submit"
-                  value="Change"
-                  className="updatePasswordBtn"
-                />
-              </form>
-            </div>
-          </div>
-        </Fragment>
-      )}
-    </Fragment>
-  );
-};
 
-export default UpdatePassword;
+                <input 
+                type="submit"
+               value="Change" 
+               className="updatePasswordBtn" 
+               />
+              </form>
+              </div>
+              </div>
+              </Fragment>
+      ) }
+       </Fragment>
+  )
+}
+
+export default UpdatePassword

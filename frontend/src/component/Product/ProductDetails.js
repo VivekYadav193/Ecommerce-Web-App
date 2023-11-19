@@ -1,7 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   clearErrors,
   getProductDetails,
@@ -21,28 +22,20 @@ import {
 } from "@material-ui/core";
 import { Rating } from "@material-ui/lab";
 import { NEW_REVIEW_RESET } from "../../constants/productConstants";
-import { useParams } from "react-router-dom";
 
-const ProductDetails = ({ match }) => {
+const ProductDetails = () => {
+  //For using id
   const { id } = useParams();
-
+  //match.params.id will replace by the above line and for this function we
+  //don't need accept match
   const dispatch = useDispatch();
   const alert = useAlert();
-
   const { product, loading, error } = useSelector(
     (state) => state.productDetails
   );
-
   const { success, error: reviewError } = useSelector(
     (state) => state.newReview
   );
-
-  const options = {
-    size: "large",
-    value: product.ratings,
-    readOnly: true,
-    precision: 0.5,
-  };
 
   const [quantity, setQuantity] = useState(1);
   const [open, setOpen] = useState(false);
@@ -50,10 +43,9 @@ const ProductDetails = ({ match }) => {
   const [comment, setComment] = useState("");
 
   const increaseQuantity = () => {
-    if (product.Stock <= quantity) return;
+    if (product.stock <= quantity) return;
 
     const qty = quantity + 1;
-    console.log(qty)
     setQuantity(qty);
   };
 
@@ -61,7 +53,6 @@ const ProductDetails = ({ match }) => {
     if (1 >= quantity) return;
 
     const qty = quantity - 1;
-    console.log(qty)
     setQuantity(qty);
   };
 
@@ -91,19 +82,23 @@ const ProductDetails = ({ match }) => {
       alert.error(error);
       dispatch(clearErrors());
     }
-
     if (reviewError) {
       alert.error(reviewError);
       dispatch(clearErrors());
     }
-
     if (success) {
       alert.success("Review Submitted Successfully");
       dispatch({ type: NEW_REVIEW_RESET });
     }
-
     dispatch(getProductDetails(id));
   }, [dispatch, id, error, alert, reviewError, success]);
+
+  const options = {
+    size: "large",
+    value: product.ratings,
+    readOnly: true,
+    precision: 0.5,
+  };
 
   return (
     <Fragment>
@@ -111,79 +106,60 @@ const ProductDetails = ({ match }) => {
         <Loader />
       ) : (
         <Fragment>
-          <MetaData title={`${product.name} -- ECOMMERCE`} />
-
-
+          <MetaData title={product.name} />
           <div className="ProductDetails">
             <div>
-
               <Carousel>
                 {product.images &&
                   product.images.map((item, i) => (
                     <img
                       className="CarouselImage"
-                      key={i}
+                      key={item.url}
                       src={item.url}
-                      alt={`${i} Slide`}
+                      alr={i + "Slide"}
                     />
                   ))}
               </Carousel>
-
             </div>
-
             <div>
-
               <div className="detailsBlock-1">
                 <h2>{product.name}</h2>
-                <p>Product # {product._id}</p>
+                <p>Product #{product._id}</p>
               </div>
-
               <div className="detailsBlock-2">
                 <Rating {...options} />
                 <span className="detailsBlock-2-span">
-                  {" "}
-                  ({product.numOfReviews} Reviews)
+                  ({product?.reviews?.length} Reviews)
                 </span>
               </div>
-
               <div className="detailsBlock-3">
-                <h1>{`₹${product.price}`}</h1>
+                <h1>₹{product.price}</h1>
                 <div className="detailsBlock-3-1">
                   <div className="detailsBlock-3-1-1">
                     <button onClick={decreaseQuantity}>-</button>
-
-                    <div className="procount" >{quantity}</div>
-
+                    <input readOnly type="number" value={quantity} />
                     <button onClick={increaseQuantity}>+</button>
                   </div>
-
                   <button
-                    disabled={product.Stock < 1 ? true : false}
+                    disabled={product.stock < 1 ? true : false}
                     onClick={addToCartHandler}
                   >
                     Add to Cart
                   </button>
-
                 </div>
-
                 <p>
                   Status:
-                  <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
-
-                    {product.Stock < 1 ? "OutOfStock" : "InStock"}
-
+                  <b className={product.stock < 1 ? "redColor" : "greenColor"}>
+                    {product.stock < 1 ? "OutOfStock " : " InStock"}
                   </b>
                 </p>
               </div>
-
               <div className="detailsBlock-4">
-                Description : <p>{product.description}</p>
+                Description:<p>{product.description}</p>
               </div>
-
               <button onClick={submitReviewToggle} className="submitReview">
                 Submit Review
               </button>
-
             </div>
           </div>
 
@@ -223,9 +199,7 @@ const ProductDetails = ({ match }) => {
           {product.reviews && product.reviews[0] ? (
             <div className="reviews">
               {product.reviews &&
-                product.reviews.map((review) => (
-                  <ReviewCard key={review._id} review={review} />
-                ))}
+                product.reviews.map((review) => <ReviewCard review={review} />)}
             </div>
           ) : (
             <p className="noReviews">No Reviews Yet</p>

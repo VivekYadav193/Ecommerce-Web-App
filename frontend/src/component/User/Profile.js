@@ -8,7 +8,7 @@ import "./Profile.css";
 
 const Profile = () => {
   const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-  const navigate = useNavigate();
+   const navigate=useNavigate();
   useEffect(() => {
     if (isAuthenticated === false) {
       navigate("/login");
@@ -18,7 +18,7 @@ const Profile = () => {
     <Fragment>
       {loading ? (
         <Loader />
-      ) : user ? (
+      ) : user?(
         <Fragment>
           <MetaData title={`${user.name}'s Profile`} />
           <div className="profileContainer">
@@ -48,7 +48,7 @@ const Profile = () => {
             </div>
           </div>
         </Fragment>
-      ) : (
+      ):(
         console.log("")
       )
       }

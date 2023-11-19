@@ -6,7 +6,7 @@
 /frontend/.pnp.js
 
 # testing
-/frontend/coverage
+#/frontend/coverage
 
 # production
 /frontend/build
