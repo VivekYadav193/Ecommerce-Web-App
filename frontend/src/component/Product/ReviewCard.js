@@ -1,6 +1,6 @@
 import React from "react";
 import { Rating } from "@material-ui/lab";
-import profile from "../../images/profile.png";
+import profile from "./profile.png";
 const ReviewCard = ({ review }) => {
   const options = {
     size: "large",
