@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.25ba6f8c.css",
+    "main.js": "/static/js/main.0b098d64.js",
+    "static/media/sunsetp.png": "/static/media/sunsetp.4c498e99dcff2ab3e495.png",
+    "static/media/Appstore.jpg": "/static/media/Appstore.fe019baa27a56b8817a7.jpg",
+    "static/media/ecart.png": "/static/media/ecart.665c169d37288eb573e9.png",
+    "index.html": "/index.html",
+    "main.25ba6f8c.css.map": "/static/css/main.25ba6f8c.css.map",
+    "main.0b098d64.js.map": "/static/js/main.0b098d64.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.25ba6f8c.css",
+    "static/js/main.0b098d64.js"
+  ]
+}
