@@ -200,3 +200,12 @@
         padding:1.8vmax;
     }
 }
+
+
+
+
+.restric{
+     display: flex;
+    padding: 6px;
+    font-size: smaller;
+}

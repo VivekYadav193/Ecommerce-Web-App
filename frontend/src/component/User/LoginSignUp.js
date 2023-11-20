@@ -142,6 +142,7 @@ const LoginSignUp = () => {
                 <Link to="/password/forgot">Forget Password ?</Link>
                 <input type="submit" value="Login" className="loginBtn" />
               </form>
+
               <form
                 className="signUpForm"
                 ref={registerTab}
@@ -180,6 +181,8 @@ const LoginSignUp = () => {
                     value={password}
                     onChange={registerDataChange}
                   />
+                     
+
                 </div>
 
                 <div id="registerImage">
@@ -190,9 +193,12 @@ const LoginSignUp = () => {
                     accept="image/*"
                     onChange={registerDataChange}
                   />
+                   <div className="restric"> { "less than 1 MB "} </div>
                 </div>
                 <input type="submit" value="Register" className="signUpBtn" />
               </form>
+
+
             </div>
           </div>
         </Fragment>
