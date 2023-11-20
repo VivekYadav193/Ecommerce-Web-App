@@ -11,4 +11,9 @@
   }
 
 
-  
+  @media only screen and (max-width: 600px) {
+    /* Adjust the max-width value as needed for your specific case */
+    .navbar-logo {
+      content: url('../../../images/ecart2.png'); /* Update the path accordingly */
+    }
+  }
