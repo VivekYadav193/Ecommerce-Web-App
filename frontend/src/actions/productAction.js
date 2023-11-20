@@ -32,7 +32,7 @@ import {
 
 // Get All Products
 export const getProduct=
- (keyword = "",currentPage=1,price=[0,125000],category,ratings=0)=>
+ (keyword = "",currentPage=1,price=[0,2500],category,ratings=0)=>
 async(dispatch)=>{
     try{
        dispatch({  type: ALL_PRODUCT_REQUEST  });
