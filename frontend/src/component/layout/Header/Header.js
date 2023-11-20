@@ -28,7 +28,7 @@ const options = {
   link1Size: "1.3vmax",
   link1Color: "rgba(35, 35, 35,0.8)",
 
-  nav1justifyContent: "flex-end",
+  nav1justifyContent: "centre",
   nav2justifyContent: "flex-end",
   nav3justifyContent: "flex-start",
   nav4justifyContent: "flex-start",
